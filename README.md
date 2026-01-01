@@ -35,6 +35,13 @@ Mariposa.mp4
 Mariquita.webm
 Perro.mp3
 
+# Optionnellement, placez-y les images qui seront utilisées en tant que miniatures
+# pour vos histoires. Pour qu'une image soit utilisée, celle-ci doit avoir exactement
+# le même nom que les fichiers audio/vidéo de vos histoires avec l'extension .jpg ou .png
+$ ls
+Gato.mp3
+Gato.jpg
+
 # Enfin, exécutez Pinpin et suivez les instructions.
 $ cd ../../
 $ ${GOPATH}/bin/pinpin mes_fichiers_pinpin

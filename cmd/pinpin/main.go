@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gawen/pinpin"
 	"github.com/google/uuid"
+	"github.com/ldoppea/pinpin"
 	"github.com/schollz/progressbar/v3"
 )
 

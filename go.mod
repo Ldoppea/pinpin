@@ -1,4 +1,4 @@
-module github.com/gawen/pinpin
+module github.com/ldoppea/pinpin
 
 go 1.24.3
 

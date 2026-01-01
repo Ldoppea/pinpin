@@ -293,13 +293,17 @@ func readLibrary(basePath string, cachePath string) ([]*pinpin.PlaylistTreeNode,
 				}
 
 				// pick an image
-				// TODO allow to pick any image
 				if fh, err := os.Create(filepath.Join(cachePath, secondUUID.String()+".jpg")); err != nil {
 					fmt.Fprintf(os.Stderr, "unable to write image for '%s': %s\n", secondPath, err.Error())
 					continue
 				} else {
-					fh.Write(pickAssetJpegRaw(secondUUID[:]))
-					fh.Close()
+					if userThumbnailPath, err := findFirstThumbnailWithExts(firstPath, secondName); err == nil {
+						fh.Write(pickUserThumbnailRaw(userThumbnailPath))
+						fh.Close()
+					} else {
+						fh.Write(pickAssetJpegRaw(secondUUID[:]))
+						fh.Close()
+					}
 				}
 
 				secondNode := new(pinpin.PlaylistTreeNode)
@@ -309,6 +313,8 @@ func readLibrary(basePath string, cachePath string) ([]*pinpin.PlaylistTreeNode,
 
 				firstNode.Children = append(firstNode.Children, secondNode)
 
+			case ".jpg":
+				fmt.Fprintf(os.Stdout, "detected thumbnail file '%s'. ignore.\n", secondPath)
 			default:
 				fmt.Fprintf(os.Stderr, "unexpected file '%s'. ignore.\n", secondPath)
 			}
